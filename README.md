@@ -1,2 +1,2 @@
 # How-To
-How to do basic operation on Internet
+This will help you in many difucult condition on the internet
