@@ -1,0 +1,27 @@
+version: "3.2"
+services:
+  nginx:
+    depends_on:
+      - smartcharacterocrserver
+      - smartcharacterocrclient
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8002:80"
+  smartcharacterocrclient:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      context: ./Smart_Characterize_OCR
+      dockerfile: Dockerfile
+      # - "output: /output"
+      # - "downloads: /downloads"
+
+  smartcharacterocrserver:
+    build:
+      context: ./Smart_Characterize_OCR
+      dockerfile: Dockerfile1
+      # volumes:
