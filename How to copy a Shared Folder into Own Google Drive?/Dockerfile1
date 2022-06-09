@@ -1,0 +1,11 @@
+FROM node:alpine
+WORKDIR /app
+RUN mkdir api
+COPY ./api/package.json ./api
+COPY ./api/package-lock.json ./api
+COPY ./api ./api
+RUN mkdir uploads
+COPY ./uploads ./uploads
+WORKDIR /app/api
+RUN npm i
+CMD [ "npm", "start" ]
