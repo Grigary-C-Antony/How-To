@@ -1,2 +1,4 @@
-FROM nginx
-COPY ./default.conf /etc/nginx/conf.d/default.conf
+FROM nikolaik/python-nodejs:latest
+WORKDIR /app
+COPY ./ ./
+CMD ["python3", "-m","http.server"]
