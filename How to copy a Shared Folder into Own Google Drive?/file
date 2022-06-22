@@ -1,1 +1,37 @@
 https://www.section.io/engineering-education/build-and-dockerize-a-full-stack-react-app-with-nodejs-and-nginx/
+
+sudo apt install nginx
+sudo systemctl restart nginx
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt-get install -y nodejs
+cd {build folder}
+npm i 
+npm start
+cd ~
+cd /etc/nginx/sites-available/
+sudo mv default defaultcopy.txt
+sudo touch default
+sudo nano default
+
+paste:
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+    }
+}
+
+ctrl + X, Y , ENTER
+
+cd ~
+sudo service nginx restart
+cd {build folder}
+sudo npm install pm2 -g
+pm2 start npm -- start
